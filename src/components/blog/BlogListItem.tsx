@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import BlogAuthorMeta from "@/components/blog/BlogAuthorMeta";
 import Tag from "@/components/site/Tag";
 import { newsDateTimeAttr } from "@/lib/content/date";
 import { cn } from "@/lib/utils";
@@ -12,18 +13,14 @@ type BlogListItemProps = {
 };
 
 export default function BlogListItem({ post }: BlogListItemProps) {
-  const metaLine = [post.date, post.author].filter(Boolean).join(" · ");
   const href = `/blog/${post.id}`;
+  const hasAuthors = post.authors.length > 0 || Boolean(post.author);
 
   return (
     <article className="blog-card-article">
-      <Link
-        href={href}
-        className={cn("blog-card", post.cover && "blog-card--with-cover")}
-        aria-label={post.title}
-      >
+      <div className={cn("blog-card", post.cover && "blog-card--with-cover")}>
         {post.cover ? (
-          <div className="blog-card__media">
+          <Link href={href} className="blog-card__media" aria-label={post.title} tabIndex={-1}>
             <Image
               src={post.cover}
               alt=""
@@ -32,17 +29,25 @@ export default function BlogListItem({ post }: BlogListItemProps) {
               sizes={blogThumbSizes}
               aria-hidden
             />
-          </div>
+          </Link>
         ) : null}
 
         <div className="blog-card__body">
-          {metaLine ? (
-            <time className="blog-card__meta" dateTime={newsDateTimeAttr(post.date)}>
-              {metaLine}
-            </time>
-          ) : null}
+          <p className="blog-card__meta">
+            <time dateTime={newsDateTimeAttr(post.date)}>{post.date}</time>
+            {hasAuthors ? (
+              <>
+                <span aria-hidden> · </span>
+                <BlogAuthorMeta authors={post.authors} authorLabel={post.author} linkAuthors />
+              </>
+            ) : null}
+          </p>
 
-          <h3 className="blog-card__title">{post.title}</h3>
+          <h3 className="blog-card__title">
+            <Link href={href} className="blog-card__title-link">
+              {post.title}
+            </Link>
+          </h3>
 
           {post.desc ? <p className="blog-card__desc">{post.desc}</p> : null}
 
@@ -54,7 +59,7 @@ export default function BlogListItem({ post }: BlogListItemProps) {
             </div>
           ) : null}
         </div>
-      </Link>
+      </div>
     </article>
   );
 }

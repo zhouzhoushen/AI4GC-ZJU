@@ -2,6 +2,15 @@
 title: 'Graph2Eval: Automatic Agent Task Generation via Knowledge Graphs'
 date: Feb 2026
 authorId: yurun-chen-2025-12551024
+links:
+  - kind: paper
+    href: https://arxiv.org/abs/2510.00507
+  - kind: code
+    href: https://github.com/YurunChen/Graph2Eval
+  - kind: xiaohongshu
+    href: https://www.xiaohongshu.com/explore/69df07650000000023016d86
+  - kind: wechat
+    href: https://mp.weixin.qq.com/s/9oeXMdY4ReexVJ0LrmgXFQ
 desc: >-
   Graph2Eval turns heterogeneous documents and web pages into a knowledge-graph
   task space, enabling scalable, controllable, and semantically grounded

@@ -4,6 +4,7 @@ import {
   resolveBlogAuthorLabel,
   resolveBlogAuthorRefs,
 } from "@/lib/content/blog-authors";
+import { resolveBlogResourceLinks } from "@/lib/content/blog-links";
 import { parseNewsDateKey } from "@/lib/content/date";
 import matter from "gray-matter";
 import { CONTENT_PATHS } from "@/lib/content/paths";
@@ -56,6 +57,7 @@ function loadBlogPostFile(postFolder: string): BlogPost | null {
     desc,
     author,
     authors,
+    links: resolveBlogResourceLinks(parsed.links),
     tags: parsed.tags,
     cover,
     coverAlt: parsed.coverAlt,
