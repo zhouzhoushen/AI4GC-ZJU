@@ -474,7 +474,9 @@ BibTeX，一条一个 entry。
 
 `/publications` 顶部提供搜索框（标题/作者/会议）、按年份筛选、按方向标签筛选（来自 `keywords`，有标签才显示）；每条论文有「Copy BibTeX」按钮复制规范引用。列表按年份降序分组（当年分 Published / Preprints，往年默认折叠）。
 
-**与 DBLP 同步（保持论文列表准确）：** `bib` 易手工出错,可用 `npm run pubs:sync` 按 `site.yaml` 的 `dblpPid` 核对 DBLP——报告作者/DOI 差异与「DBLP 上已发表但库里没有」的新论文(只读)；确认无误后用 `npm run pubs:sync -- --apply` 自动追加这些新论文。仓库还配了每月自动核对的 GitHub Action（`.github/workflows/dblp-sync-check.yml`），有漂移时开 issue 提醒。
+**与 DBLP 同步（保持论文列表准确）：** `bib` 易手工出错,可用 `npm run pubs:sync` 按 `site.yaml` 的 `dblpPid` 核对 DBLP——报告标题大小写、作者/DOI 差异与「DBLP 上已发表但库里没有」的新论文(只读)；确认无误后:`npm run pubs:sync -- --apply` 追加新论文,`npm run pubs:sync -- --fix-titles` 用 DBLP 权威大小写回填标题(修正 `LLMs`/`GUI`/`AccKV` 等被小写的缩写)。仓库还配了每月自动核对的 GitHub Action（`.github/workflows/dblp-sync-check.yml`），有漂移时开 issue 提醒。
+
+> 标题大小写:解析器默认会把标题做句首式大小写;`bib-publications.ts` 已设 `sentenceCase: false` 保留原文,因此 `.bib` 里的标题应写成正确大小写（缩写保持大写）。
 
 ---
 

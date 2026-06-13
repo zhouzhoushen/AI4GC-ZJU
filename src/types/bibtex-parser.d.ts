@@ -10,5 +10,10 @@ declare module "@retorquere/bibtex-parser" {
     errors: unknown[];
   };
 
-  export function parse(input: string): BibParseResult;
+  export type BibParseOptions = {
+    /** When false, titles are kept verbatim instead of being sentence-cased. */
+    sentenceCase?: boolean;
+  };
+
+  export function parse(input: string, options?: BibParseOptions): BibParseResult;
 }

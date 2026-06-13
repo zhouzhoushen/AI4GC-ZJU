@@ -17,6 +17,7 @@ import path from "path";
 const ROOT = process.cwd();
 const BIB = path.join(ROOT, "content/publications.bib");
 const APPLY = process.argv.includes("--apply");
+const FIX_TITLES = process.argv.includes("--fix-titles");
 const pidArg = process.argv.indexOf("--pid");
 const PID = pidArg !== -1 ? process.argv[pidArg + 1] : process.env.DBLP_PID || "47/3459-1";
 
@@ -106,6 +107,17 @@ function toBibtex(rec, used) {
   return lines.join("\n");
 }
 
+const escapeRegex = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+// Replace only the title field inside a specific entry's block.
+function setTitle(text, key, newTitle) {
+  const re = new RegExp(`(@\\w+\\{\\s*${escapeRegex(key)},)([\\s\\S]*?)(\\n\\})`);
+  return text.replace(re, (m, head, body, tail) => {
+    const nb = body.replace(/(\btitle\s*=\s*\{)[^{}]*(\})/, `$1${newTitle}$2`);
+    return head + nb + tail;
+  });
+}
+
 // --- main ---
 if (!existsSync(BIB)) {
   console.error(`Missing ${BIB}`);
@@ -122,9 +134,19 @@ console.log(`DBLP records: ${records.length}`);
 
 // Diffs (author / official-DOI) for titles present in both
 const diffs = [];
+const titleFixes = new Map(); // entry key -> { old, new, preprint }
 for (const rec of records) {
   const e = bibByTitle.get(normTitle(rec.title));
   if (!e) continue;
+
+  // Title casing/format fix: same paper, different verbatim title → adopt DBLP's.
+  if (rec.title && rec.title !== (e.fields.title || "")) {
+    const existing = titleFixes.get(e.key);
+    if (!existing || (existing.preprint && !rec.preprint)) {
+      titleFixes.set(e.key, { old: e.fields.title || "", new: rec.title, preprint: rec.preprint });
+    }
+  }
+
   const cur = (e.fields.author || "").split(/\s+and\s+/i).map((a) => a.trim()).filter(Boolean);
   const authorsSame =
     cur.length === rec.authors.length && cur.every((a, i) => normName(a) === normName(rec.authors[i]));
@@ -141,18 +163,30 @@ const newPubs = records
   .filter((rec) => !rec.preprint && !isMinorEntry(rec.title) && !bibByTitle.has(normTitle(rec.title)))
   .sort((a, b) => b.year - a.year);
 
+console.log(`\n========== TITLE casing fixes — ${titleFixes.size} ==========`);
+for (const [key, f] of titleFixes) console.log(`[TITLE] ${key}\n     old: ${f.old}\n     new: ${f.new}`);
 console.log(`\n========== DIFFS (review manually) — ${diffs.length} ==========`);
 for (const d of diffs) console.log(d);
 console.log(`\n========== NEW published papers on DBLP — ${newPubs.length} ==========`);
 for (const r of newPubs) console.log(`[NEW] ${r.year}  ${r.title}  (${r.venue})`);
 
+let wrote = false;
+if (FIX_TITLES && titleFixes.size > 0) {
+  for (const [key, f] of titleFixes) bib = setTitle(bib, key, f.new);
+  wrote = true;
+  console.log(`\n✓ Updated ${titleFixes.size} titles in content/publications.bib`);
+}
 if (APPLY && newPubs.length > 0) {
   const block =
     "\n% ---- Added by sync-dblp.mjs (new published papers from DBLP) ----\n\n" +
     newPubs.map((r) => toBibtex(r, usedKeys)).join("\n\n") + "\n";
-  writeFileSync(BIB, bib.replace(/\s*$/, "") + "\n" + block);
+  bib = bib.replace(/\s*$/, "") + "\n" + block;
+  wrote = true;
   console.log(`\n✓ Appended ${newPubs.length} new published entries to content/publications.bib`);
 }
+if (wrote) writeFileSync(BIB, bib);
 
-console.log(`\nSUMMARY — DIFF: ${diffs.length}   NEW: ${newPubs.length}   (${APPLY ? "applied" : "report only"})`);
-if (!APPLY && diffs.length + newPubs.length > 0) process.exit(2); // signal drift for CI
+console.log(
+  `\nSUMMARY — TITLE: ${titleFixes.size}   DIFF: ${diffs.length}   NEW: ${newPubs.length}   (${wrote ? "applied" : "report only"})`,
+);
+if (!wrote && titleFixes.size + diffs.length + newPubs.length > 0) process.exit(2); // signal drift for CI

@@ -201,7 +201,9 @@ export function loadPublicationsFromBibFile(bibPath: string): PublicationItem[] 
   }
 
   const raw = readFileSync(bibPath, "utf-8");
-  const parsed = parseBib(raw);
+  // sentenceCase:false keeps titles verbatim from source, so acronyms like
+  // "LLMs", "GUI", "AccKV" aren't folded to lowercase on display.
+  const parsed = parseBib(raw, { sentenceCase: false });
 
   return parsed.entries.map(publicationFromBibEntry);
 }
