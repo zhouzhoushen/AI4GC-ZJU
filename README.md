@@ -37,6 +37,10 @@ npm run typecheck  # TypeScript
 npm run check      # lint + typecheck + test + build
 ```
 
+## Contributing
+
+Lab members: see **[CONTRIBUTING.md](CONTRIBUTING.md)** (中文) for the Fork → Pull Request workflow and the current list of content tasks. `master` is protected — all changes land via reviewed PRs.
+
 ## Content
 
 Site copy, structured data, and site-level assets live in **`content/`**. By default you edit files in git and redeploy. An optional admin file console can edit the same files when enabled.
