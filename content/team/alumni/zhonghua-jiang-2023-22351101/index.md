@@ -44,8 +44,6 @@ In addition, I worked on cloud-edge collaborative evolution of large and small m
 
 ## @papers Selected Papers
 
-<!-- @bib publications -->
-
 - acckvtowardsefficientaudio2026
 - retentivekvstatespace2026
 - purekvplugandplay2025
