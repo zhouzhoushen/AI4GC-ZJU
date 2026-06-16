@@ -19,9 +19,9 @@ We are happy to share that **CHORD** has been accepted to **ACM MM 2025**. CHORD
 
 On-device recommendation is attractive because it is private, low-latency, and reduces server load. Making the on-device model *personal*, however, is expensive: one either fine-tunes on the device, which requires backpropagation, or ships a fresh model to every user, which consumes substantial bandwidth. CHORD instead casts personalization as a **quantization** problem rather than a **training** problem.
 
-## The challenge: customization and compression at once
+## The challenge: customization and compression at the same time
 
-Device-cloud recommendation faces several tensions at once:
+Device-cloud recommendation faces several tensions simultaneously:
 
 - **Interest and resource heterogeneity.** Users differ in taste, and their devices differ in memory, compute, and bandwidth.
 - **Evolving interests.** User behavior drifts over time, so a one-shot deployment becomes stale.
@@ -51,7 +51,7 @@ The strategy is produced by three components:
 
 ## Why it is efficient
 
-The design pays off along four axes at once:
+The design pays off along four axes at the same time:
 
 - **Better recommendation** — models are personalized to each user rather than shared across all users.
 - **Faster adaptation** — a single forward pass, with no on-device training.
