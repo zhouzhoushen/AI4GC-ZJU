@@ -1,7 +1,7 @@
 ---
 title: 'RetentiveKV: State-Space Memory for Uncertainty-Aware Multimodal KV Cache Eviction'
 date: Jun 2026
-author: Sihao Liu
+authorId: sihao-liu-2024-22451056
 desc: >-
   RetentiveKV reformulates KV cache eviction from discrete context truncation to
   continuous memory evolution using entropy-driven State Space Models, achieving

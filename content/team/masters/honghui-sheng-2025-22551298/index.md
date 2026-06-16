@@ -30,6 +30,6 @@ I'm currently working on **self-generated trajectory data** for GUI agents — b
 
 ## @papers Selected Papers
 
-@bib publications
+@bib papers.bib
 
 - zhang2026dacbench

@@ -11,9 +11,6 @@ tags:
   - Recommendation Systems
 email: lyosihao@zju.edu.cn
 profile: true
-links:
-  - label: GitHub
-    href: 'https://github.com/'
 ---
 
 ## About Me
