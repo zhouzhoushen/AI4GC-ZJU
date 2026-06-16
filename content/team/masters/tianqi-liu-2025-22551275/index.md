@@ -20,7 +20,7 @@ links:
 ---
 ## About Me
 
-Hi! I'm **Tianqi Liu (刘天琦)**, a first-year M.S. student at AI4GC Lab, Zhejiang University, advised by [Shengyu Zhang](https://person.zju.edu.cn/shengyuzhang). I received my B.S. in Software Engineering from Tongji University, where I graduated as an Outstanding Graduate.
+Hi! I'm **Tianqi Liu (刘天琦)**, a first-year M.S. student at AI4GC Lab, Zhejiang University, advised by [Shengyu Zhang](https://person.zju.edu.cn/shengyuzhang).
 
 My research focuses on **recommender systems** and **LLM agents** — in particular model customization, lightweight on-device deployment, and reinforcement-learning-based refinement. Recently I have grown interested in **personalized, user-centric LLM agents** and the challenge of proactive interaction in human–agent collaboration.
 
