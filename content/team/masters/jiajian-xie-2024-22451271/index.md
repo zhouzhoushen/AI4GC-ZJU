@@ -3,11 +3,11 @@ startDate: 2024
 name: Jiajian Xie
 photo: photo.jpg
 bio: >-
-  Master's student working on 3D generation and efficient inference for visual models, including model speech-driven talking face & Text/Image-to-3D Generation, as well as step distillation & training-free acceleration for diffusion and VAR models.
+  Master's student working on 3D generation and efficient inference for visual models, including speech-driven talking face & Text/Image-to-3D Generation, as well as step distillation & training-free acceleration for diffusion and VAR models.
 tags:
   - 3D Generation
   - Step Distillation
-  - Visual Model Traning-free Acceleration
+  - Training-free Acceleration
 email: xiejiajian@zju.edu.cn
 profile: true
 links:
@@ -21,11 +21,11 @@ links:
 
 ## About Me
 
-Hi! I am **Jiajian Xie**, a master’s student at AI4GC Lab, Zhejiang University, advised by [Shengyu Zhang](https://person.zju.edu.cn/shengyuzhang). My research focuses on <strong>3D content generation</strong> and <strong>efficient inference for visual generative models</strong>.
+Hi! I am **Jiajian Xie**, a master’s student at AI4GC Lab, Zhejiang University, advised by [Shengyu Zhang](https://person.zju.edu.cn/shengyuzhang). My research focuses on **3D content generation** and **efficient inference for visual generative models**.
 
-Specifically, I work on <strong>Speech-driven Talking Face & Text/Image-to-3D Generation</strong>, as well as <strong>Step Distillation & Training-free Acceleration Methods</strong> for Diffusion and Visual Autoregressive (VAR) models. 
+Specifically, I work on **Speech-driven Talking Face & Text/Image-to-3D Generation**, as well as **Step Distillation & Training-free Acceleration Methods** for Diffusion and Visual Autoregressive (VAR) models.
 
-My goal is to make <strong>high-fidelity visual generation</strong>—spanning 3D, images, and video—more practical and efficient for <strong>real-world and real-time applications</strong>.
+My goal is to make **high-fidelity visual generation**—spanning 3D, images, and video—more practical and efficient for **real-world and real-time applications**.
 
 ## Research Interests
 
@@ -36,7 +36,7 @@ My goal is to make <strong>high-fidelity visual generation</strong>—spanning 3
 ## Education
 
 - *2024.09 - 2027.06* · M.S. in Artificial Intelligence, Zhejiang University.
-- *2020.09 - 2024.06* · B.S. in Electronic Business and Computer Science (Dual Degree), SouthChina University of Technology.
+- *2020.09 - 2024.06* · B.S. in Electronic Business and Computer Science (Dual Degree), South China University of Technology.
 
 ## @papers Selected Papers
 
